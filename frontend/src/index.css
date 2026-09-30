@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Lexend", "Noto Sans Ethiopic", sans-serif;
+
+  /* Primary: warm taupe (S.M.A buttons / active tab) */
+  --color-brand: #5f5b52;
+  --color-brand-dark: #46433c;
+  --color-taupe: #5f5b52;
+
+  /* Accent: olive-mustard (S.M.A identity swatch) */
+  --color-accent: #8b7a2f;
+
+  /* Status colors, muted to sit on cream */
+  --color-available: #5d7a3c;
+  --color-unavailable: #a1572b;
+  --color-unknown: #8a857a;
+
+  /* Surfaces */
+  --color-page: #efefeb;
+  --color-surface: #f5f5f2;
+  --color-selected: #d3d9db;
+
+  /* Text */
+  --color-ink: #5a564d;
+  --color-muted: #7f7a6f;
+
+  /* Lines */
+  --color-border: #d2d1cb;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    background: var(--color-page);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #c4c3bc transparent;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    background-color: var(--color-page);
+
+    /*
+     * Rough creamy paper:
+     *  1) fine speckle grain (the "sandpaper" feel)
+     *  2) soft coarse mottling so it isn't flat
+     *  3) gentle light-centre / darker-edge wash
+     * All three are fixed to the viewport so the texture doesn't
+     * slide around while scrolling.
+     */
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .35 0 0 0 0 .31 1.7 0 0 0 -.68'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='m' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.32' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .49 0 0 0 0 .44 1.2 0 0 0 -.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"),
+      radial-gradient(
+        ellipse at 50% 30%,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0) 70%
+      );
+
+    background-size: 240px 240px, 320px 320px, 100% 100%;
+    background-repeat: repeat, repeat, no-repeat;
+    background-attachment: scroll, scroll, fixed;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input,
+  textarea,
+  select {
+    outline: none;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    opacity: 1;
+    color: var(--color-muted);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-taupe);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: rgba(139, 122, 47, 0.22);
+    color: var(--color-ink);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #c4c3bc;
+    border-radius: 0;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a9a8a1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
